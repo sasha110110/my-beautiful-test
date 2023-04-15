@@ -11,5 +11,5 @@ def about():
     return 'About'
 
 @app.route('/test')
-def about():
+def test():
     return 'test'
