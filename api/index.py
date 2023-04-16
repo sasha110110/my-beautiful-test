@@ -5,7 +5,10 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import telegram
 
 TOKEN = "5650199850:AAFVpNnH9pLBXQkomn-nJZlBnNucjP4s3sQ"
+
 update=telegram.Update
+context=telegram.ext.CallbackContext
+
 updater = Updater(TOKEN, use_context=True)
 bot=telegram.Bot(TOKEN)
 
