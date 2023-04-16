@@ -18,8 +18,9 @@ def home():
 
 @app.route('/test')
 def test():
-    chat_id="@1093497662"# msg.sender_chat["username"]
-    bot.sendMessage(chat_id=chat_id, text="test")
+    #chat_id="@1093497662"# msg.sender_chat["username"]
+    #bot.sendMessage(chat_id=chat_id, text="test")
+    return "SMTH"
   
 
 @app.route("/hook", methods=['POST', "GET"])
