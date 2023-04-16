@@ -27,7 +27,7 @@ def test():
 def hook():
    if request.method == "POST":
        content = json.loads(request.get_data())# #WORKING
-        print(content)
+       print(content)
        
         #chat_id = request.json["message"]["chat"]["id"]
        chat_id="1093497662"# msg.sender_chat["username"]
