@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
@@ -30,6 +30,6 @@ def hook():
        
         #chat_id = request.json["message"]["chat"]["id"]
        chat_id="1093497662"# msg.sender_chat["username"]
-       bot.sendMessage(chat_id=chat_id, text="test2")
+       bot.sendMessage(chat_id=chat_id, text=str(content))
    return 'ok'
     
