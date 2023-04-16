@@ -23,7 +23,7 @@ def test():
     
   
 
-@app.route("/hook", methods=['POST'])
+@app.route("/"+TOKEN, methods=['POST'])
 def hook():
    if request.method == "POST":
        content = json.loads(request.get_data())# #WORKING
