@@ -5,6 +5,7 @@ import telegram
 
 TOKEN = "5650199850:AAFVpNnH9pLBXQkomn-nJZlBnNucjP4s3sQ"
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "mimi"
 update=telegram.Update
 context=telegram.ext.CallbackContext
 
@@ -26,6 +27,7 @@ def test():
 def hook():
    if request.method == "POST":
        content = json.loads(request.get_data())# #WORKING
+        print(content)
        
         #chat_id = request.json["message"]["chat"]["id"]
        chat_id="1093497662"# msg.sender_chat["username"]
