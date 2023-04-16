@@ -18,7 +18,7 @@ def home():
 
 @app.route('/test')
 def test():
-    #chat_id="@1093497662"# msg.sender_chat["username"]
+    #chat_id="1093497662"# msg.sender_chat["username"]
     #bot.sendMessage(chat_id=chat_id, text="test")
     return "SMTH"
   
@@ -29,7 +29,7 @@ def hook():
        content = json.loads(request.get_data())# #WORKING
        
         #chat_id = request.json["message"]["chat"]["id"]
-       chat_id="@1093497662"# msg.sender_chat["username"]
+       chat_id="1093497662"# msg.sender_chat["username"]
        bot.sendMessage(chat_id=chat_id, text=str(content))
    return 'ok'
     
