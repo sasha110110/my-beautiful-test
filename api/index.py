@@ -1,11 +1,10 @@
 from flask import Flask, request
-
-app = Flask(__name__)
+import json
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import telegram
 
 TOKEN = "5650199850:AAFVpNnH9pLBXQkomn-nJZlBnNucjP4s3sQ"
-
+app = Flask(__name__)
 update=telegram.Update
 context=telegram.ext.CallbackContext
 
@@ -23,7 +22,7 @@ def test():
     
   
 
-@app.route("/hook", methods=['POST', "GET"])
+@app.route("/hook", methods=['POST'])
 def hook():
    if request.method == "POST":
        content = json.loads(request.get_data())# #WORKING
@@ -31,5 +30,5 @@ def hook():
         #chat_id = request.json["message"]["chat"]["id"]
        chat_id="1093497662"# msg.sender_chat["username"]
        bot.sendMessage(chat_id=chat_id, text=str(content))
-   return 'ok'
+   return "ok"
     
