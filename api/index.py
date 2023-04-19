@@ -28,7 +28,7 @@ def greet(update, context):
     global CHAT_TO
     CHAT_TO=update.message.chat_id
     text="Hiiiii"
-    context.bot.sendMessage(text=text, chat_id=CHAT_TO)context.bot.sendMessage(text=text, chat_id=CHAT_TO)
+    context.bot.sendMessage(text=text, chat_id=CHAT_TO)
     
 proc_handler= MessageHandler(Filters.text & (~Filters.command) , process_msg)
 greet_handler=CommandHandler("start", greet)
