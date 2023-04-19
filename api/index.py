@@ -14,7 +14,6 @@ context=telegram.ext.CallbackContext
 
 updater = Updater(TOKEN, use_context=True)
 bot=telegram.Bot(TOKEN)
-updater = Updater(TOKEN)
 dp = updater.dispatcher
 
 CHAT_TO = ""
@@ -56,7 +55,7 @@ def test():
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
    if request.method == "POST":
-       dp.process_update(update) #dp.processUpdate(update)
+       dp.processUpdate(json.loads(request.get_data())
        #content = json.loads(request.get_data())# #WORKING
        #print(content)
        
