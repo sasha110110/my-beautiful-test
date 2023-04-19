@@ -18,28 +18,6 @@ dp = updater.dispatcher
 
 CHAT_TO = ""
 
-def help(update, context):
-    global CHAT_TO
-    CHAT_TO=update.message.chat_id
-    text="Я бот простого поиска. Ищу по ключевым словам и темам на сайте и в туториале. Просто напиши что искать"
-    context.bot.sendMessage(text=text, chat_id=CHAT_TO)
-def greet(update, context):
-    global CHAT_TO
-    CHAT_TO=update.message.chat_id
-    text="Hiiiii"
-    context.bot.sendMessage(text=text, chat_id=CHAT_TO)
-    
-proc_handler= MessageHandler(Filters.text & (~Filters.command) , process_msg)
-greet_handler=CommandHandler("start", greet)
-#query_handler=CallbackQueryHandler(first_choice)
-
-   
-dp.add_handler(proc_handler)
-dp.add_handler(greet_handler)
-#dp.add_handler(query_handler, group=1)
-    
-
-    
 
 @app.route('/')
 def home():
@@ -47,6 +25,15 @@ def home():
 
 @app.route('/test')
 def test():
+    
+    bttons=[InlineKeyboardButton("Поиск в туториале", callback_data=3),
+            InlineKeyboardButton("Поиск по статьям", callback_data=1),
+            InlineKeyboardButton("Статьи по темам и отраслям", callback_data=2)
+            ]
+    
+    keyboard=[[b] for b in bttons]
+    reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
+    update.message.reply_text("Где мне поискать?", reply_markup=reply_markup)
     chat_id="1093497662"# msg.sender_chat["username"]
     bot.sendMessage(chat_id=chat_id, text="test")
     
@@ -55,12 +42,12 @@ def test():
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
    if request.method == "POST":
-       dp.processUpdate(json.loads(request.get_data()))
-       #content = json.loads(request.get_data())# #WORKING
-       #print(content)
+       
+       content = json.loads(request.get_data())# #WORKING
+       print(content)
        
         ##chat_id = request.json["message"]["chat"]["id"]
-       #chat_id="1093497662"# msg.sender_chat["username"]
-       #bot.sendMessage(chat_id=chat_id, text=str(content))
+       chat_id="1093497662"# msg.sender_chat["username"]
+       bot.sendMessage(chat_id=chat_id, text=str(content))
    return "ok"
     
