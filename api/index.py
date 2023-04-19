@@ -55,7 +55,7 @@ def test():
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
    if request.method == "POST":
-       dp.processUpdate(json.loads(request.get_data())
+       dp.processUpdate(json.loads(request.get_data()))
        #content = json.loads(request.get_data())# #WORKING
        #print(content)
        
