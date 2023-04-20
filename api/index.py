@@ -16,7 +16,7 @@ context=telegram.ext.CallbackContext
 
 updater = Updater(TOKEN, use_context=True)
 bot=telegram.Bot(TOKEN)
-bot.removeWebhook()
+#bot.removeWebhook()
 #time.sleep(1)
 bot.setWebhook(url)
 
