@@ -17,7 +17,18 @@ bot=telegram.Bot(TOKEN)
 
 @app.route('/')
 def home():
-    return 'Hello, World!'
+    def home():
+    html='''<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h2 style="color:blue">Бот простого поиска ФВ</h2>
+    </body>
+</html>
+'''
+
+    return html
 
 @app.route('/test')
 def test():
@@ -32,7 +43,9 @@ def hook():
        content = json.loads(request.get_data())# #WORKING
        print(content)
        
-        #chat_id = request.json["message"]["chat"]["id"]
+       #chat_id = request.json["message"]["chat"]["id"]
        chat_id="1093497662"# msg.sender_chat["username"]
-       bot.sendMessage(chat_id=chat_id, text=str(content))
+       #bot.sendMessage(chat_id=chat_id, text=str(content))
+       bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["id"]))
+       bot.sendMessage(chat_id=chat_id, text=str(content["text"]))
    return "ok"
