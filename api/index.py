@@ -30,7 +30,7 @@ def home():
     </body>
 </html>
 '''
-    return 'Hello, World!'
+    return html
 
 @app.route('/test')
 def test():
