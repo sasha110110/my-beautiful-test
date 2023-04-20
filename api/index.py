@@ -36,30 +36,17 @@ def test():
     chat_id="1093497662"# msg.sender_chat["username"]
     bot.sendMessage(chat_id=chat_id, text="test")
     
-    #bttons=[InlineKeyboardButton("Поиск в туториале", callback_data=3),
-        #    InlineKeyboardButton("Поиск по статьям", callback_data=1),
-        #    InlineKeyboardButton("Статьи по темам и отраслям", callback_data=2)
-        #    ]
-    
-   # keyboard=[[b] for b in bttons]
-    #reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
-   # update.message.reply_text("Где мне поискать?", reply_markup=reply_markup)
-   # chat_id="1093497662"# msg.sender_chat["username"]
-   # bot.sendMessage(chat_id=chat_id, text="test")
-    
+   
   
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-    
-    if request.method == "POST":
-        content = json.loads(request.get_data())# #WORKING
-        print(content)
+   if request.method == "POST":
+       content = json.loads(request.get_data())# #WORKING
+       print(content)
        
-        ##chat_id = request.json["message"]["chat"]["id"]
-        chat_id="1093497662"# msg.sender_chat["username"]
-       #bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["id"]))
-       #bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["text"]))
-        bot.sendMessage(chat_id=chat_id, text=str(content))
-    return "ok"
+        #chat_id = request.json["message"]["chat"]["id"]
+       chat_id="1093497662"# msg.sender_chat["username"]
+       bot.sendMessage(chat_id=chat_id, text=str(content))
+   return "ok"
     
