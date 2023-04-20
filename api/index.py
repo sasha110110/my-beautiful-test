@@ -21,6 +21,15 @@ CHAT_TO = ""
 
 @app.route('/')
 def home():
+    html='''<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h2 style="color:blue">Бот простого поиска ФВ</h2>
+    </body>
+</html>
+'''
     return 'Hello, World!'
 
 @app.route('/test')
@@ -51,6 +60,6 @@ def hook():
        chat_id="1093497662"# msg.sender_chat["username"]
        bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["id"]))
        bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["text"]))
-       bot.sendMessage(chat_id=chat_id, text=str(content["text"]))
+       bot.sendMessage(chat_id=chat_id, text=str(content['text']))
    return "ok"
     
