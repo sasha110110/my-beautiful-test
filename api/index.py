@@ -58,7 +58,7 @@ def hook():
        reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
        if "start" in info:
            bot.sendMessage(chat_id=chat_id, text=greet_text)
-           bot.sendMessage("Где мне поискать?", reply_markup=reply_markup)
+           bot.sendMessage(chat_id=chat_id, "Где мне поискать?", reply_markup=reply_markup)
        
        
        #chat_id="1093497662"# msg.sender_chat["username"]
