@@ -6,7 +6,7 @@ from telegram.ext import Updater , CommandHandler, Filters, MessageHandler, Call
 import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 
-TOKEN = "5650199850:AAFVpNnH9pLBXQkomn-nJZlBnNucjP4s3sQ"
+TOKEN = "5650199850:AAFACvLnysc-mwkRALoqNNTO6IW8z03XqsA"
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mimi"
 update=telegram.Update
