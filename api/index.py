@@ -15,39 +15,24 @@ context=telegram.ext.CallbackContext
 updater = Updater(TOKEN, use_context=True)
 bot=telegram.Bot(TOKEN)
 
-CHAT_TO = ""
-
-
 @app.route('/')
 def home():
-    html='''<!doctype html>
-<html>
-    <head>
-    </head>
-    <body>
-        <h2 style="color:blue">Бот простого поиска ФВ</h2>
-    </body>
-</html>
-'''
-    return html
+    return 'Hello, World!'
 
 @app.route('/test')
 def test():
     chat_id="1093497662"# msg.sender_chat["username"]
     bot.sendMessage(chat_id=chat_id, text="test")
     
-   
   
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-    global bot
-    if request.method == "POST":
-        content = json.loads(request.get_data())# #WORKING
-        print(content)
+   if request.method == "POST":
+       content = json.loads(request.get_data())# #WORKING
+       print(content)
        
         #chat_id = request.json["message"]["chat"]["id"]
-        chat_id="1093497662"# msg.sender_chat["username"]
-        bot.sendMessage(chat_id=chat_id, text=str(content))
+       chat_id="1093497662"# msg.sender_chat["username"]
+       bot.sendMessage(chat_id=chat_id, text=str(content))
    return "ok"
-    
