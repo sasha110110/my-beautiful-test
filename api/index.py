@@ -16,8 +16,8 @@ context=telegram.ext.CallbackContext
 
 updater = Updater(TOKEN, use_context=True)
 bot=telegram.Bot(TOKEN)
-#bot.removeWebhook()
-#time.sleep(1)
+bot.deleteWebhook()
+time.sleep(1)
 bot.setWebhook(url)
 
 
@@ -44,12 +44,12 @@ def test():
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
    if request.method == "POST":
-       content = json.loads(request.get_data())# #WORKING
-       print(content)
+       #content = json.loads(request.get_data())# #WORKING
+   
+       chat_id=request.json["message"]["chat"]["id"]
+       info=str(request.json["message"]["text"])
        
-       #chat_id = request.json["message"]["chat"]["id"]
-       chat_id="1093497662"# msg.sender_chat["username"]
-       #bot.sendMessage(chat_id=chat_id, text=str(content))
-       bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["id"]))
-       bot.sendMessage(chat_id=chat_id, text=str(content["text"]))
+       
+       #chat_id="1093497662"# msg.sender_chat["username"]
+       bot.sendMessage(chat_id=chat_id, text=info)
    return "ok"
