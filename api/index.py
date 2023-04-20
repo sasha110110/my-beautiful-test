@@ -25,17 +25,18 @@ def home():
 
 @app.route('/test')
 def test():
+    pass
     
-    bttons=[InlineKeyboardButton("Поиск в туториале", callback_data=3),
-            InlineKeyboardButton("Поиск по статьям", callback_data=1),
-            InlineKeyboardButton("Статьи по темам и отраслям", callback_data=2)
-            ]
+    #bttons=[InlineKeyboardButton("Поиск в туториале", callback_data=3),
+        #    InlineKeyboardButton("Поиск по статьям", callback_data=1),
+        #    InlineKeyboardButton("Статьи по темам и отраслям", callback_data=2)
+        #    ]
     
-    keyboard=[[b] for b in bttons]
-    reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
-    update.message.reply_text("Где мне поискать?", reply_markup=reply_markup)
-    chat_id="1093497662"# msg.sender_chat["username"]
-    bot.sendMessage(chat_id=chat_id, text="test")
+   # keyboard=[[b] for b in bttons]
+    #reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
+   # update.message.reply_text("Где мне поискать?", reply_markup=reply_markup)
+   # chat_id="1093497662"# msg.sender_chat["username"]
+   # bot.sendMessage(chat_id=chat_id, text="test")
     
   
 
@@ -48,6 +49,8 @@ def hook():
        
         ##chat_id = request.json["message"]["chat"]["id"]
        chat_id="1093497662"# msg.sender_chat["username"]
-       bot.sendMessage(chat_id=chat_id, text=str(content))
+       bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["id"]))
+       bot.sendMessage(chat_id=chat_id, text=str(request.json["message"]["chat"]["text"]))
+       bot.sendMessage(chat_id=chat_id, text=str(content["text"]))
    return "ok"
     
