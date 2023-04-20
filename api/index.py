@@ -25,13 +25,13 @@ bot.setWebhook(url)
 def home():
     def home():
     html='''<!doctype html>
-<html>
+    <html>
     <head>
     </head>
     <body>
         <h2 style="color:blue">Бот простого поиска ФВ</h2>
     </body>
-</html>
+    </html>
 '''
 
     return html
