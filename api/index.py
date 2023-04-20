@@ -23,7 +23,6 @@ bot.setWebhook(url)
 
 @app.route('/')
 def home():
-    def home():
     html='''<!doctype html>
     <html>
     <head>
@@ -33,7 +32,6 @@ def home():
     </body>
     </html>
     '''
-
     return html
 
 @app.route('/test')
