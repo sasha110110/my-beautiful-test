@@ -41,12 +41,13 @@ def test():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-   if request.method == "POST":
-       content = json.loads(request.get_data())# #WORKING
-       print(content)
+    global bot
+    if request.method == "POST":
+        content = json.loads(request.get_data())# #WORKING
+        print(content)
        
         #chat_id = request.json["message"]["chat"]["id"]
-       chat_id="1093497662"# msg.sender_chat["username"]
-       bot.sendMessage(chat_id=chat_id, text=str(content))
+        chat_id="1093497662"# msg.sender_chat["username"]
+        bot.sendMessage(chat_id=chat_id, text=str(content))
    return "ok"
     
