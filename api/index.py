@@ -32,7 +32,7 @@ def home():
         <h2 style="color:blue">Бот простого поиска ФВ</h2>
     </body>
     </html>
-'''
+    '''
 
     return html
 
