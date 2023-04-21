@@ -50,16 +50,23 @@ def hook():
        greet_text="Привет. Я бот простого поиска Flowvision"
        keyboard=[["Поиск в туториале", 
                   "Поиск по статьям", 
-                "Статьи по темам и отраслям"]]
+                "Статьи по темам"]]
     
        #keyboard=[[b] for b in bttons]
-       reply_markup = ReplyKeyboardMarkup(keyboard,
-                                       one_time_keyboard=True,
-                                       resize_keyboard=True)
+       reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
        #reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
        if "start" in info:
            #bot.sendMessage(chat_id=chat_id, text=greet_text)
            bot.sendMessage(chat_id, "Где мне поискать?", reply_markup=reply_markup)
+        
+       if "Поиск в туториале" in info:
+           pass
+       
+       if "Поиск по статьям" in info:
+          pass
+    
+       if "Статьи по темам" in info:
+          pass
        
        
        #chat_id="1093497662"# msg.sender_chat["username"]
