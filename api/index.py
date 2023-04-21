@@ -34,10 +34,9 @@ def home():
     '''
     return html
 
-@app.route('/test')
+@app.route('/test/'+TOKEN)
 def test():
-    chat_id="1093497662"# msg.sender_chat["username"]
-    bot.sendMessage(chat_id=chat_id, text="test")
+    return "ok"
     
   
 
@@ -57,7 +56,7 @@ def hook():
        keyboard=[[b] for b in bttons]
        reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
        if "start" in info:
-           bot.sendMessage(chat_id=chat_id, text=greet_text)
+           #bot.sendMessage(chat_id=chat_id, text=greet_text)
            bot.sendMessage(chat_id=chat_id, "Где мне поискать?", reply_markup=reply_markup)
        
        
