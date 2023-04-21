@@ -48,13 +48,15 @@ def hook():
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"])
        greet_text="Привет. Я бот простого поиска Flowvision"
-       bttons=[InlineKeyboardButton("Поиск в туториале", callback_data=3),
-            InlineKeyboardButton("Поиск по статьям", callback_data=1),
-            InlineKeyboardButton("Статьи по темам и отраслям", callback_data=2)
-            ]
+       keyboard=[["Поиск в туториале",
+                "Поиск по статьям", 
+                "Статьи по темам и отраслям"]]            ]
     
-       keyboard=[[b] for b in bttons]
-       reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
+       #keyboard=[[b] for b in bttons]
+       reply_markup = ReplyKeyboardMarkup(keyboard,
+                                       one_time_keyboard=True,
+                                       resize_keyboard=True)
+       #reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
        if "start" in info:
            #bot.sendMessage(chat_id=chat_id, text=greet_text)
            bot.sendMessage(chat_id, "Где мне поискать?", reply_markup=reply_markup)
