@@ -48,9 +48,9 @@ def hook():
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"])
        greet_text="Привет. Я бот простого поиска Flowvision"
-       keyboard=[["Поиск в туториале",
-                "Поиск по статьям", 
-                "Статьи по темам и отраслям"]]            ]
+       keyboard=[["Поиск в туториале", 
+                  "Поиск по статьям", 
+                "Статьи по темам и отраслям"]]
     
        #keyboard=[[b] for b in bttons]
        reply_markup = ReplyKeyboardMarkup(keyboard,
