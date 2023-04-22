@@ -9,7 +9,7 @@ from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKe
 import pandas as pd
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-#df_tutorial = pd.read_csv('FV_tutorial.csv')
+df_tutorial = pd.read_csv(os.path.join(base_dir,'FV_tutorial.csv'))
 #df_apps = pd.read_csv('df_all_articles.csv')
 
 GLOBAL_SEARCH=""
