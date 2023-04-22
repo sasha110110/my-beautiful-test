@@ -9,25 +9,24 @@ from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKe
 import pandas as pd
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-df_tutorial = pd.read_csv(os.path.join(base_dir,'FV_tutorial.csv'))
-#df_apps = pd.read_csv('df_all_articles.csv')
+df_tutorial = pd.read_csv(os.path.join("data",'FV_tutorial.csv'))
+#df_apps = pd.read_csv(os.path.join("data", 'df_all_articles.csv'))
 
 GLOBAL_SEARCH=""
 
 
-
 def is_similar(query, string):
-  list_of_words=query.split()
-  new_list=[word[:-2] for word in list_of_words if len(word)>=5]
-  num_of_contained_words_list=[]
-  num_of_contained_words=0
-  for word in new_list:
-      if (isinstance(string, str)):
-          if word in string:
-               num_of_contained_words+=1
-      else:
-        pass
-  return num_of_contained_words
+    list_of_words=query.split()
+    new_list=[word[:-2] for word in list_of_words if len(word)>=5]
+    num_of_contained_words_list=[]
+    num_of_contained_words=0
+    for word in new_list:
+        if (isinstance(string, str)):
+              if word in string:
+                  num_of_contained_words+=1
+        else:
+          pass
+    return num_of_contained_words
 
 TOKEN = "5650199850:AAFACvLnysc-mwkRALoqNNTO6IW8z03XqsA"
 url="https://my-beautiful-test.vercel.app/"+TOKEN
