@@ -5,8 +5,8 @@
           "use": "@vercel/python"
       }, 
      {
-            "src": "./static/images",
-            "use": "@vercel/static"
+            "src": "./data/",
+            "use": "@vercel/data"
         }
   ],
   "rewrites": [
