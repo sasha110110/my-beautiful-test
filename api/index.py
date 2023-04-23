@@ -9,10 +9,11 @@ from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKe
 import pandas as pd
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
-with open(os.path.join("data", "df_all_articles.json", 'r')) as f:
-    df_all_a_list = json.load(f)
+df_articles = pd.read_csv('df_all_articles.csv')
+#with open(os.path.join("data", "df_all_articles.json", 'r')) as f:
+    #df_all_a_list = json.load(f)
 #df_tutorial = pd.read_pickle(os.path.join("data",'FV_tutorial.pkl'))
-df_apps = pd.DataFrame(result, columns=["Q", "link", "category"])
+#df_apps = pd.DataFrame(result, columns=["Q", "link", "category"])
 
 GLOBAL_SEARCH=""
 
