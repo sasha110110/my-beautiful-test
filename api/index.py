@@ -7,7 +7,7 @@ from telegram.ext import Updater , CommandHandler, Filters, MessageHandler, Call
 import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 import pandas as pd
-from df_all_articles import df_list
+from api.df_all_articles import df_list
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
 #df_articles = pd.read_csv('df_all_articles.csv')
