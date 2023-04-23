@@ -8,8 +8,8 @@ import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 import pandas as pd
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
-df_tutorial = pd.read_csv(os.path.join(base_dir,'FV_tutorial.csv'))
+#base_dir = os.path.dirname(os.path.abspath(__file__))
+df_tutorial = pd.read_pickle(os.path.join("data",'FV_tutorial.pkl'))
 #df_apps = pd.read_csv(os.path.join("data", 'df_all_articles.csv'))
 
 GLOBAL_SEARCH=""
