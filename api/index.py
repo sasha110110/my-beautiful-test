@@ -9,7 +9,7 @@ from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKe
 import pandas as pd
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
-df_articles = pd.read_csv('df_all_articles.csv')
+#df_articles = pd.read_csv('df_all_articles.csv')
 #with open(os.path.join("data", "df_all_articles.json", 'r')) as f:
     #df_all_a_list = json.load(f)
 #df_tutorial = pd.read_pickle(os.path.join("data",'FV_tutorial.pkl'))
@@ -66,7 +66,9 @@ def test():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
+   #df_articles = pd.read_csv('df_all_articles.csv')
    if request.method == "POST":
+       df_articles = pd.read_csv('df_all_articles.csv')
        #content = json.loads(request.get_data())# #WORKING
    
        chat_id=request.json["message"]["chat"]["id"]
