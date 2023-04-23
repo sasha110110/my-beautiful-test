@@ -1,10 +1,5 @@
 {
-  "routes": [
-    { "scr": "/api/(.*)",
-    "dest": "/api/index.py"}
-    {"scr": "/data/(.*)",
-    "dest": "/api/index.py"}
-]
+ 
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
   ]
