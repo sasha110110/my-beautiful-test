@@ -7,6 +7,7 @@ from telegram.ext import Updater , CommandHandler, Filters, MessageHandler, Call
 import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 import pandas as pd
+from df_all_articles import df_list
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
 #df_articles = pd.read_csv('df_all_articles.csv')
@@ -66,9 +67,9 @@ def test():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-   #df_articles = pd.read_csv('df_all_articles.csv')
+   
    if request.method == "POST":
-       df_articles = pd.read_csv('df_all_articles.csv')
+       
        #content = json.loads(request.get_data())# #WORKING
    
        chat_id=request.json["message"]["chat"]["id"]
