@@ -12,7 +12,7 @@ import pandas as pd
 df_articles = pd.read_csv('/data/df_all_articles.csv')
 #with open(os.path.join("data", "df_all_articles.json", 'r')) as f:
     #df_all_a_list = json.load(f)
-#df_tutorial = pd.read_pickle(os.path.join("data",'FV_tutorial.pkl'))
+df_tutorial = pd.read_csv("/data/FV_tutorial.csv")
 #df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
 
 GLOBAL_SEARCH=""
@@ -68,7 +68,7 @@ def test():
 def hook():
     msg_counter=0
    
-   if request.method == "POST":
+    if request.method == "POST":
         
        #content = json.loads(request.get_data())# #WORKING
    
