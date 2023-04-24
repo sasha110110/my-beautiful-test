@@ -93,8 +93,8 @@ def hook():
            #bot.sendMessage(chat_id=chat_id, text=greet_text)
            bot.sendMessage(chat_id, "Где мне поискать?", reply_markup=reply_markup)
            msg_counter+=1
-        if "callback_query" in request.json:
-            bot.sendMessage(chat_id, text=str(request.json))
+       if "callback_query" in request.json:
+           bot.sendMessage(chat_id, text=str(request.json))
             
         
        if "Поиск в туториале" in info:
