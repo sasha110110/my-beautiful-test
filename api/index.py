@@ -7,14 +7,18 @@ from telegram.ext import Updater , CommandHandler, Filters, MessageHandler, Call
 import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 import pandas as pd
-from api.df_all_articles import df_list
+
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
-#df_articles = pd.read_csv('/data/df_all_articles.csv')
-f=open(os.path.join("data", "df_all_articles.csv"))
-    #df_all_a_list = json.load(f)
+
+#f=open(os.path.join("data", "df_all_articles.csv"))
+with open("df_all_articles.csv", "r") as data:
+
+    li = data.read()#.split('\n')
+    df_articles=pd.read_csv(StringIO(li))
+    
 #df_tutorial = pd.read_csv("/data/FV_tutorial.csv")
-df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
+#df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
 
 GLOBAL_SEARCH=""
 
