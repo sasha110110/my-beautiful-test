@@ -10,7 +10,7 @@ import pandas as pd
 from api.df_all_articles import df_list
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
-df_articles = pd.read_csv('/data/df_all_articles.csv')
+#df_articles = pd.read_csv('/data/df_all_articles.csv')
 #with open(os.path.join("data", "df_all_articles.json", 'r')) as f:
     #df_all_a_list = json.load(f)
 #df_tutorial = pd.read_csv("/data/FV_tutorial.csv")
@@ -67,6 +67,7 @@ def test():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
+    df_articles = pd.read_csv('/data/df_all_articles.csv')
     msg_counter=0
    
     if request.method == "POST":
