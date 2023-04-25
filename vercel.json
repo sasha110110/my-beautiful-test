@@ -5,10 +5,11 @@
       "includeFiles": "data/**"
     }
   },
-  "routes": [{ "src": "/", "dest": "api/index.py" }]
+  "routes": [{ "src": "/", "dest": "api/index.py" }
+            ]
 
  
-  "rewrites": [
+  "rewrites": [ 
     { "source": "/(.*)", "destination": "/api/index" }
   ]
 }
