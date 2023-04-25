@@ -1,4 +1,12 @@
 {
+ {
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "data/**"
+    }
+  },
+  "routes": [{ "src": "/", "dest": "api/index.py" }]
+
  
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
