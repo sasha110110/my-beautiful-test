@@ -19,6 +19,7 @@ from api.df_all_articles import df_list
 #df_articles=pd.read_csv(StringIO(li))
 #df_tutorial = pd.read_csv("FV_tutorial.csv")
 #df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
+
 df_articles=pd.read_csv(os.path.join("data", "df_all_articles.csv"))
 df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
 
@@ -89,17 +90,38 @@ def hook():
            bot.sendMessage(chat_id, "Пожалуйста, выбери в синем меню, где мне поискать!")
            msg_counter+=1
        if any(item in info for item in ["tutorial", "article", "tag"]):
+           GLOBAL_SEARCH+=info
            bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
             
         
-       if "Поиск в туториале" in info:
-           pass
+       if GLOBAL_SEARCH=="tutorial":
+           df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
+           df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+           variants=df_temp.values
+        #forming link from ttorial
+           for var in variants:
+               bot.sendMessage(chat_id=chat_id,
+                                    text=var[0]+"\n"+
+                                    f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
+                                    disable_web_page_preview=True)
        
-       if "Поиск по статьям" in info:
-          pass
+       if GLOBAL_SEARCH=="article":
+           df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
+           df_temp=df_article.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
+           variants=df_temp.values
+        #forming link from ttorial
+           for var in variants:
+               bot.sendMessage(chat_id=chat_id,
+                                    text=var[0]+"\n"+
+                                    str(var[1]))
     
-       if "Статьи по темам" in info:
-          pass
+       if GLOBAL_SEARCH=="tag":
+           df_temp=df_article[df_article["category"]==info[:-1]]
+           variants=df_temp.values
+           for var in variants:
+               bot.sendMessage(chat_id=chat_id,
+                                    text=var[2]+"\n"+
+                                    str(var[1]))
        
        
        #chat_id="1093497662"# msg.sender_chat["username"]
