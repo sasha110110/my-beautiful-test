@@ -17,7 +17,7 @@ with open("df_all_articles.csv", "r") as data:
     li = data.read()#.split('\n')
     df_articles=pd.read_csv(StringIO(li))
     
-df_tutorial = pd.read_csv("FV_tutorial.csv")
+#df_tutorial = pd.read_csv("FV_tutorial.csv")
 #df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
 
 GLOBAL_SEARCH=""
