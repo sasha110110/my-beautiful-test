@@ -13,13 +13,6 @@ from api.df_all_articles import df_list
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
 
-#f=open(os.path.join("data", "df_all_articles.csv"))
-#data=open("df_all_articles.csv")
-#li = f.read()#.split('\n')
-#df_articles=pd.read_csv(StringIO(li))
-#df_tutorial = pd.read_csv("FV_tutorial.csv")
-#df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
-
 df_articles=pd.read_csv(os.path.join("data", "df_all_articles.csv"))
 df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
 
@@ -85,7 +78,7 @@ def hook():
        greet_text="Привет. Я бот простого поиска Flowvision"
        
        
-       if "start" in info:
+       if "start" in info and msg_counter==0:
            bot.sendMessage(chat_id=chat_id, text=greet_text)
            bot.sendMessage(chat_id, "Пожалуйста, выбери в синем меню, где мне поискать!")
            msg_counter+=1
@@ -104,6 +97,7 @@ def hook():
                                     text=var[0]+"\n"+
                                     f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
                                     disable_web_page_preview=True)
+            msg_counter=0
        
        if GLOBAL_SEARCH=="article":
            df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
@@ -114,6 +108,8 @@ def hook():
                bot.sendMessage(chat_id=chat_id,
                                     text=var[0]+"\n"+
                                     str(var[1]))
+            msg_counter=0
+            
     
        if GLOBAL_SEARCH=="tag":
            df_temp=df_article[df_article["category"]==info[:-1]]
@@ -122,6 +118,7 @@ def hook():
                bot.sendMessage(chat_id=chat_id,
                                     text=var[2]+"\n"+
                                     str(var[1]))
+            msg_counter=0
        
        
        #chat_id="1093497662"# msg.sender_chat["username"]
