@@ -15,8 +15,8 @@ from api.df_all_articles import df_list
 
 f=open(os.path.join("data", "df_all_articles.csv"))
 #data=open("df_all_articles.csv")
-#li = data.read()#.split('\n')
-#df_articles=pd.read_csv(StringIO(li))
+li = f.read()#.split('\n')
+df_articles=pd.read_csv(StringIO(li))
 #df_tutorial = pd.read_csv("FV_tutorial.csv")
 df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
 
