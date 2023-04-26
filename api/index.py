@@ -73,8 +73,8 @@ def test():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-    msg_counter=0
-   
+ 
+    msg_counter=0   
     if request.method == "POST":
         
        #content = json.loads(request.get_data())# #WORKING
@@ -82,26 +82,14 @@ def hook():
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"])
        greet_text="Привет. Я бот простого поиска Flowvision"
-       # keyboard=[["Поиск в туториале", 
-                 # "Поиск по статьям", 
-              #  "Статьи по темам"]]
-    
-       #keyboard=[[b] for b in bttons]
-       #reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
-       bttons=[InlineKeyboardButton("Поиск в туториале", callback_data=3),
-            InlineKeyboardButton("Поиск по статьям", callback_data=1),
-            InlineKeyboardButton("Статьи по темам и отраслям", callback_data=2)
-            ]
-    
-       keyboard=[[b] for b in bttons]
-       reply_markup = InlineKeyboardMarkup(keyboard, row_width=0)
+       
        
        if "start" in info:
-           #bot.sendMessage(chat_id=chat_id, text=greet_text)
-           bot.sendMessage(chat_id, "Где мне поискать?", reply_markup=reply_markup)
+           bot.sendMessage(chat_id=chat_id, text=greet_text)
+           bot.sendMessage(chat_id, "Пожалуйста, выбери в синем меню, где мне поискать!")
            msg_counter+=1
-       if "callback_data" in request.json:
-           bot.sendMessage(chat_id, text=str(request.json))
+       if any(item in info for item in ["tutorial", "article", "tag"]):
+           bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
             
         
        if "Поиск в туториале" in info:
