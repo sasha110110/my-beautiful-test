@@ -7,6 +7,7 @@ from telegram.ext import Updater , CommandHandler, Filters, MessageHandler, Call
 import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 import pandas as pd
+from io import StringIO
 
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
