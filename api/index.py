@@ -8,6 +8,7 @@ import os
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardMarkup
 import pandas as pd
 from io import StringIO
+from api.df_all_articles import df_list
 
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -17,8 +18,8 @@ from io import StringIO
 #li = data.read()#.split('\n')
 #df_articles=pd.read_csv(StringIO(li))
     
-df_tutorial = pd.read_csv("FV_tutorial.csv")
-#df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
+#df_tutorial = pd.read_csv("FV_tutorial.csv")
+df_articles = pd.DataFrame(df_list, columns=["Q", "link", "category"])
 
 GLOBAL_SEARCH=""
 
