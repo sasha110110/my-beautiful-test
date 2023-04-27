@@ -98,7 +98,7 @@ def hook():
                                     text=var[0]+"\n"+
                                     f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
                                     disable_web_page_preview=True)
-            msg_counter=0
+           msg_counter=0
        
        if "article" in GLOBAL_SEARCH:
            df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
@@ -109,7 +109,7 @@ def hook():
                bot.sendMessage(chat_id=chat_id,
                                     text=var[0]+"\n"+
                                     str(var[1]))
-            msg_counter=0
+           msg_counter=0
             
     
        if "tag" in GLOBAL_SEARCH:
@@ -119,7 +119,7 @@ def hook():
                bot.sendMessage(chat_id=chat_id,
                                     text=var[2]+"\n"+
                                     str(var[1]))
-            msg_counter=0
+           msg_counter=0
        
        
        #chat_id="1093497662"# msg.sender_chat["username"]
