@@ -79,7 +79,7 @@ def hook():
        
        
        if "start" in info:
-           msg_counter+=1:
+           msg_counter+=1
            if msg_counter == 1:
            
                bot.sendMessage(chat_id=chat_id, text=greet_text)
