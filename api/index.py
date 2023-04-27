@@ -79,10 +79,11 @@ def hook():
        
        
        if "start" in info:
-           bot.sendMessage(chat_id=chat_id, text=greet_text)
-           msg_counter+=1
-           if msg_counter>0:
-               break
+           if msg_conter==0:
+               bot.sendMessage(chat_id=chat_id, text=greet_text)
+               msg_counter+=1
+     
+               
        if any(item in info for item in ["tutorial", "article", "tag"]):
            GLOBAL_SEARCH+=info
            bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
