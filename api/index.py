@@ -68,7 +68,6 @@ def test():
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
  
-    CHAT_ID=""
     msg_counter=0
     if request.method == "POST":
         
@@ -87,12 +86,12 @@ def hook():
                msg_counter=0
         
      
-               
+             
        if any(item in info for item in ["tutorial", "article", "tag"]):
-           GLOBAL_SEARCH+=info
+           GLOBAL_SEARCH+=item
            bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
             
-        
+       #if not any....  
        if "tutorial" in GLOBAL_SEARCH:
            df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
            df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
