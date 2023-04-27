@@ -68,7 +68,7 @@ def test():
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
  
-    msg_counter=0   
+    #msg_counter=0   
     if request.method == "POST":
         
        #content = json.loads(request.get_data())# #WORKING
@@ -79,9 +79,9 @@ def hook():
        
        
        if "start" in info:
-           if msg_conter==0:
-               bot.sendMessage(chat_id=chat_id, text=greet_text)
-               msg_counter+=1
+           
+           bot.sendMessage(chat_id=chat_id, text=greet_text)
+               #msg_counter+=1
      
                
        if any(item in info for item in ["tutorial", "article", "tag"]):
