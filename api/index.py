@@ -75,19 +75,18 @@ def hook():
    
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"])
-       greet_text="Привет. Я бот простого поиска Flowvision"
+       greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
        
        if "start" in info and msg_counter==0:
            bot.sendMessage(chat_id=chat_id, text=greet_text)
-           bot.sendMessage(chat_id, "Пожалуйста, выбери в синем меню, где мне поискать!")
            msg_counter+=1
        if any(item in info for item in ["tutorial", "article", "tag"]):
            GLOBAL_SEARCH+=info
            bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
             
         
-       if GLOBAL_SEARCH=="tutorial":
+       if "tutorial" in GLOBAL_SEARCH:
            df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
            df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
            variants=df_temp.values
@@ -99,7 +98,7 @@ def hook():
                                     disable_web_page_preview=True)
             msg_counter=0
        
-       if GLOBAL_SEARCH=="article":
+       if "article" in GLOBAL_SEARCH:
            df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
            df_temp=df_article.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
            variants=df_temp.values
@@ -111,7 +110,7 @@ def hook():
             msg_counter=0
             
     
-       if GLOBAL_SEARCH=="tag":
+       if "tag" in GLOBAL_SEARCH:
            df_temp=df_article[df_article["category"]==info[:-1]]
            variants=df_temp.values
            for var in variants:
