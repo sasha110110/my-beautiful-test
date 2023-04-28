@@ -87,7 +87,7 @@ def hook():
         
      
              
-       if info in ["tutorial", "article", "tag"]:№any(item in info for item in ["tutorial", "article", "tag"]):
+       if info in ["tutorial", "article", "tag"]: #any(item in info for item in ["tutorial", "article", "tag"]):
            GLOBAL_SEARCH+=info
            bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
        if "start" in info:
