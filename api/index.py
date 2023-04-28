@@ -77,7 +77,7 @@ def hook():
        info=str(request.json["message"]["text"])
        greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
-       
+       from_whom=request.json["message"]["from_user"]["username"]
        #if "start" in info:
            #msg_counter+=1
            #if msg_counter == 1:
@@ -86,49 +86,49 @@ def hook():
                #msg_counter=0
         
      
-             
-       if info in ["tutorial", "article", "tag"]: #any(item in info for item in ["tutorial", "article", "tag"]):
-           GLOBAL_SEARCH+=info
-           bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
-       if "start" in info:
-           bot.sendMessage(chat_id, text=str(df_articles.head(2).values)) #TEST
+       if "Yummietestbot" not in from_whom:   
+           if info in ["tutorial", "article", "tag"]: #any(item in info for item in ["tutorial", "article", "tag"]):
+               GLOBAL_SEARCH+=info
+               bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
+           if "start" in info:
+               bot.sendMessage(chat_id, text=str(df_articles.head(2).values)) #TEST
            
             
        #if not any....  
-       if "tutorial" in GLOBAL_SEARCH:
-           df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
-           df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
-           variants=df_temp.values
-           GLOBAL_SEARCH=""
+           if "tutorial" in GLOBAL_SEARCH:
+               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
+               df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+               variants=df_temp.values
+               GLOBAL_SEARCH=""
         #forming link from ttorial
-           for var in variants:
-               bot.sendMessage(chat_id=chat_id,
-                                    text=var[0]+"\n"+
-                                    f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
-                                    disable_web_page_preview=True)
+               for var in variants:
+                   bot.sendMessage(chat_id=chat_id, 
+                                   text=var[0]+"\n"+
+                                   f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
+                                   disable_web_page_preview=True)
            
        
-       if "article" in GLOBAL_SEARCH:
-           df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
-           df_temp=df_article.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
-           variants=df_temp.values
-           GLOBAL_SEARCH=""
+           if "article" in GLOBAL_SEARCH:
+               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
+               df_temp=df_article.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
+               variants=df_temp.values
+               GLOBAL_SEARCH=""
         #forming link from ttorial
-           for var in variants:
-               bot.sendMessage(chat_id=chat_id,
-                                    text=var[0]+"\n"+
-                                    str(var[1]))
+               for var in variants:
+                   bot.sendMessage(chat_id=chat_id,
+                                   text=var[0]+"\n"+
+                                   str(var[1]))
            
             
     
-       if "tag" in GLOBAL_SEARCH:
-           df_temp=df_article[df_article["category"]==info[:-1]]
-           variants=df_temp.values
-           GLOBAL_SEARCH=""
-           for var in variants:
-               bot.sendMessage(chat_id=chat_id,
-                                    text=var[2]+"\n"+
-                                    str(var[1]))
+           if "tag" in GLOBAL_SEARCH:
+               df_temp=df_article[df_article["category"]==info[:-1]]
+               variants=df_temp.values
+               GLOBAL_SEARCH=""
+               for var in variants:
+                   bot.sendMessage(chat_id=chat_id,
+                                   text=var[2]+"\n"+
+                                   str(var[1]))
            
        
        
