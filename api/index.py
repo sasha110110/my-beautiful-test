@@ -69,7 +69,7 @@ def test():
 def hook():
  
     msg_counter=0
-    if request.method == "POST" and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
+    if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
        #content = json.loads(request.get_data())# #WORKING
    
@@ -77,7 +77,7 @@ def hook():
        info=str(request.json["message"]["text"])
        greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
-       from_whom=request.json["message"]["from_user"]["username"]
+       #from_whom=request.json["message"]["from_user"]["username"]
        #if "start" in info:
            #msg_counter+=1
            #if msg_counter == 1:
