@@ -63,7 +63,9 @@ def home():
 def test():
     return "ok"
     
-  
+@app.route('/test')
+def test_sending():
+    bot.sendMessage(chat_id="1093497662", text="TEST")  
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
