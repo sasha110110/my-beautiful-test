@@ -99,7 +99,7 @@ def hook():
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
            
-       if info[1:] not in ["tutorial", "article", "tag"]:     
+       if GLOBAL_SEARCH:     
            if "tutorial" in GLOBAL_SEARCH:
                df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
