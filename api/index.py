@@ -94,10 +94,10 @@ def hook():
        #if not "Yummietestbot" in from_whom:   
        if info[1:] in ["tutorial", "article", "tag"]: #any(item in info for item in ["tutorial", "article", "tag"]):
            GLOBAL_SEARCH+=info
-           bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
+           #bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
        if "help" in info:
-           bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. Сначала выбеи в синем меню внизу слева, где мне начать поиск:\
-           в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
+           bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
+           Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
            
        if info[1:] not in ["tutorial", "article", "tag"]:     
            if "tutorial" in GLOBAL_SEARCH:
