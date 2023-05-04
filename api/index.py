@@ -66,7 +66,7 @@ def test():
 @app.route('/check')
 def check():
     global df_articles
-    bot.sendMessage(chat_id="1093497662", text=df_articles.head(2).values) 
+    bot.sendMessage(chat_id="1093497662", text=str(df_articles.head(2).values))
     return "ok"
 
 @app.route("/"+TOKEN, methods=['POST'])
