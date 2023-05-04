@@ -65,12 +65,14 @@ def test():
     
 @app.route('/check')
 def check():
-    bot.sendMessage(chat_id="1093497662", text="TEST")  
+    global df_articles
+    bot.sendMessage(chat_id="1093497662", text=df_articles.head(2).values) 
+    return "ok"
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
     global df_articles
-    global df_ttorial
+    global df_tutorial
     global GLOBAL_SEARCH
  
     
@@ -79,7 +81,7 @@ def hook():
        #content = json.loads(request.get_data())# #WORKING
    
        chat_id=request.json["message"]["chat"]["id"]
-       info=str(request.json["message"]["text"])
+       info=str(request.json["message"]["text"]).lower()
        #greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
        #from_whom=request.json["message"]["from_user"]["username"]
