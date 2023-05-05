@@ -15,6 +15,8 @@ from api.df_all_articles import df_list
 
 df_articles=pd.read_csv(os.path.join("data", "df_all_articles.csv"))
 df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
+df_articles.apply(lambda x: x.astype(str).str.lower())
+df_tutorial.apply(lambda x: x.astype(str).str.lower())
 
 GLOBAL_SEARCH=""
 
@@ -67,6 +69,7 @@ def test():
 def check():
     global df_articles
     bot.sendMessage(chat_id="1093497662", text=str(df_articles.head(2).values))
+    
     return "ok"
 
 @app.route("/"+TOKEN, methods=['POST'])
@@ -82,6 +85,7 @@ def hook():
    
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"]).lower()
+       console.log(info)
        #greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
        #from_whom=request.json["message"]["from_user"]["username"]
@@ -94,7 +98,7 @@ def hook():
         
      
        #if not "Yummietestbot" in from_whom:   
-       if info[1:] in ["tutorial", "article", "tag"]: #any(item in info for item in ["tutorial", "article", "tag"]):
+       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
            GLOBAL_SEARCH+=info
            #bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
        if "help" in info:
