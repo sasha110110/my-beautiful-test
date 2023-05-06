@@ -93,16 +93,20 @@ def hook():
        #console.log(info)
        chat_id=content["message"]["chat"]["id"]
        info=str(content["message"]["text"]).lower()
-       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
-           GLOBAL_SEARCH+=info
-           #bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
        if "help" in info:
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
+        
+       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
+           GLOBAL_SEARCH+=info
+           bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
+       
            
-       if GLOBAL_SEARCH:     
-           if "tutorial" in GLOBAL_SEARCH:
-               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
+       if GLOBAL_SEARCH:
+           info2=json.loads(request.get_data())
+           info2_text=info2["message"]["text"]
+           if "tutorial" in GLOBAL_SEARCH and info2["message"]["entities"]["type"]!="bot_command" :
+               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info2_text, string))
                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
                variants=df_temp.values
                GLOBAL_SEARCH=""
@@ -115,7 +119,7 @@ def hook():
            
        
            if "article" in GLOBAL_SEARCH:
-               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
+               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info2_text, string))
                df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
                variants=df_temp.values
                GLOBAL_SEARCH=""
@@ -128,7 +132,7 @@ def hook():
             
     
            if "tag" in GLOBAL_SEARCH:
-               df_temp=df_article[df_article["category"]==info[:-1]]
+               df_temp=df_article[df_article["category"]==info2_text[:-1]]
                variants=df_temp.values
                GLOBAL_SEARCH=""
                for var in variants:
