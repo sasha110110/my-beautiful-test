@@ -77,15 +77,20 @@ def check():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
+    global df_articles
+    global df_tutorial
+    global GLOBAL_SEARCH
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
-       #content = json.loads(request.get_data())# #WORKING
+       content = json.loads(request.get_data())# #WORKING
        
    
-       chat_id=request.json["message"]["chat"]["id"]
-       info=str(request.json["message"]["text"]).lower()
+       #chat_id=request.json["message"]["chat"]["id"]
+       #info=str(request.json["message"]["text"]).lower()
        #console.log(info)
+       chat_id=content["message"]["chat"]["id"]
+       info=str(content["message"]["text"]).lower()
        df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
        variants=df_temp.head(2).values
        bot.sendMessage(chat_id=chat_id, text=str(variants))
