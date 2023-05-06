@@ -93,9 +93,49 @@ def hook():
        #console.log(info)
        chat_id=content["message"]["chat"]["id"]
        info=str(content["message"]["text"]).lower()
-       df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar("расчетная сетка", string))
-       variants=df_tutorial.head(2).values
-       bot.sendMessage(chat_id=chat_id, text=info)
+       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
+           GLOBAL_SEARCH+=info
+           #bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
+       if "help" in info:
+           bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
+           Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
+           
+       if GLOBAL_SEARCH:     
+           if "tutorial" in GLOBAL_SEARCH:
+               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
+               df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+               variants=df_temp.values
+               GLOBAL_SEARCH=""
+        #forming link from ttorial
+               for var in variants:
+                   bot.sendMessage(chat_id=chat_id, 
+                                   text=var[0]+"\n"+
+                                   f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
+                                   disable_web_page_preview=True)
+           
+       
+           if "article" in GLOBAL_SEARCH:
+               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
+               df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
+               variants=df_temp.values
+               GLOBAL_SEARCH=""
+        #forming link from ttorial
+               for var in variants:
+                   bot.sendMessage(chat_id=chat_id,
+                                   text=var[0]+"\n"+
+                                   str(var[1]))
+           
+            
+    
+           if "tag" in GLOBAL_SEARCH:
+               df_temp=df_article[df_article["category"]==info[:-1]]
+               variants=df_temp.values
+               GLOBAL_SEARCH=""
+               for var in variants:
+                   bot.sendMessage(chat_id=chat_id,
+                                   text=var[2]+"\n"+
+                                   str(var[1]))
+           
        
        
        return "ok"
