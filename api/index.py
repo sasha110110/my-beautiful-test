@@ -12,16 +12,15 @@ from api.df_all_articles import df_list
 
 
 #base_dir = os.path.dirname(os.path.abspath(__file__))
-
+global df_articles
+global df_tutorial
+global GLOBAL_SEARCH
 df_articles=pd.read_csv(os.path.join("data", "df_all_articles.csv"))
 df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
 df_articles.apply(lambda x: x.astype(str).str.lower())
 df_tutorial.apply(lambda x: x.astype(str).str.lower())
 
 GLOBAL_SEARCH=""
-global df_articles
-global df_tutorial
-global GLOBAL_SEARCH
 
 
 def is_similar(query, string):
