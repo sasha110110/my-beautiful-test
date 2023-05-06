@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, session
 import json
 import time
 import telegram
@@ -67,10 +67,12 @@ def test():
     
 @app.route('/check')
 def check():
-    global df_articles
-    bot.sendMessage(chat_id="1093497662", text=str(df_articles.head(2).values))
+    #global df_articles
+    #bot.sendMessage(chat_id="1093497662", text=str(df_articles.head(2).values))
+    my_var = session.get('my_var', None)
+    return str(my_var)
     
-    return "ok"
+  
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
@@ -81,7 +83,10 @@ def hook():
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
-       content = json.loads(request.get_data())# #WORKING
+       #content = json.loads(request.get_data())# #WORKING
+       session['my_var'] = str(request.json)
+       return redirect(url_for('check'))
+       
    
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"]).lower()
@@ -146,4 +151,4 @@ def hook():
        
        #chat_id="1093497662"# msg.sender_chat["username"]
        #bot.sendMessage(chat_id=chat_id, text=info)
-    return "ok"
+    #return "ok"
