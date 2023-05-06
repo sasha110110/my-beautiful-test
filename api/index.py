@@ -74,7 +74,7 @@ def check():
     
   
 
-@app.route("/"+TOKEN, methods=['POST' 'GET'])
+@app.route("/"+TOKEN, methods=['POST'])
 def hook():
     global df_articles
     global df_tutorial
@@ -83,15 +83,14 @@ def hook():
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
-       #content = json.loads(request.get_data())# #WORKING
-       session['my_var'] = str(request.json)
-       return redirect(url_for('check'))
+       content = json.loads(request.get_data())# #WORKING
        
    
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"]).lower()
        console.log(info)
        bot.sendMessage(chat_id="1093497662", text=str(content))
+       bot.sendMessage(chat_id="1093497662", text=info)
        #greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
        #from_whom=request.json["message"]["from_user"]["username"]
