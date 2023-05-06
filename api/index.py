@@ -82,7 +82,7 @@ def hook():
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
-       №content = json.loads(request.get_data())# #WORKING
+       #content = json.loads(request.get_data())# #WORKING
        
    
        chat_id=request.json["message"]["chat"]["id"]
