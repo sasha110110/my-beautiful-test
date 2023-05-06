@@ -70,6 +70,8 @@ def test():
 @app.route('/check')
 def check():
     global df_articles
+    df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar("расчетная сетка", string))
+    #variants=df_temp.head(2).values
     bot.sendMessage(chat_id="1093497662", text=str(df_articles.head(2).values))
     
     
@@ -92,7 +94,7 @@ def hook():
        #chat_id=content["message"]["chat"]["id"]
        #info=str(content["message"]["text"]).lower()
        df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar("расчетная сетка", string))
-       variants=df_temp.head(2).values
+       variants=df_tutorial.head(2).values
        bot.sendMessage(chat_id="1093497662", text=str(content))
        
        
