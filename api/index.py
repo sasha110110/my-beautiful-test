@@ -91,11 +91,11 @@ def hook():
        #chat_id=request.json["message"]["chat"]["id"]
        #info=str(request.json["message"]["text"]).lower()
        #console.log(info)
-       #chat_id=content["message"]["chat"]["id"]
-       #info=str(content["message"]["text"]).lower()
+       chat_id=content["message"]["chat"]["id"]
+       info=str(content["message"]["text"]).lower()
        df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar("расчетная сетка", string))
        variants=df_tutorial.head(2).values
-       bot.sendMessage(chat_id="1093497662", text=str(content))
+       bot.sendMessage(chat_id=chat_id, text=info)
        
        
        return "ok"
