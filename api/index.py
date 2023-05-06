@@ -75,9 +75,9 @@ def check():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-    global df_articles
-    global df_tutorial
-    global GLOBAL_SEARCH
+    #global df_articles
+    #global df_tutorial
+    #global GLOBAL_SEARCH
  
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
