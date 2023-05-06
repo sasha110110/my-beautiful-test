@@ -15,12 +15,14 @@ from api.df_all_articles import df_list
 global df_articles
 global df_tutorial
 global GLOBAL_SEARCH
+global KEYWORDS
 df_articles=pd.read_csv(os.path.join("data", "df_all_articles.csv"))
 df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
 df_articles.apply(lambda x: x.astype(str).str.lower())
 df_tutorial.apply(lambda x: x.astype(str).str.lower())
 
 GLOBAL_SEARCH=""
+KEYWORDS=""
 
 
 def is_similar(query, string):
@@ -82,6 +84,7 @@ def hook():
     global df_articles
     global df_tutorial
     global GLOBAL_SEARCH
+    global KEYWORDS
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
@@ -100,9 +103,12 @@ def hook():
        if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
            GLOBAL_SEARCH+=info
            bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
+           info2=json.loads(request.get_data())
+           info2_text=info2["message"]["text"]
+           KEYWORDS+=info2_text
        
            
-       if GLOBAL_SEARCH:
+       if GLOBAL_SEARCH and KEYWORDS:
            info2=json.loads(request.get_data())
            info2_text=info2["message"]["text"]
            if "tutorial" in GLOBAL_SEARCH and info2["message"]["entities"]["type"]!="bot_command" :
