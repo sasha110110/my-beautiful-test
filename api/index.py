@@ -21,8 +21,8 @@ df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
 df_articles.apply(lambda x: x.astype(str).str.lower())
 df_tutorial.apply(lambda x: x.astype(str).str.lower())
 
-GLOBAL_SEARCH=""
-KEYWORDS=""
+GLOBAL_SEARCH=None
+KEYWORDS=None
 
 
 def is_similar(query, string):
@@ -101,21 +101,21 @@ def hook():
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
         
        if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
-           GLOBAL_SEARCH+=info
-           bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
-           info2=json.loads(request.get_data())
-           info2_text=info2["message"]["text"]
-           KEYWORDS+=info2_text
+           GLOBAL_SEARCH = info
+           #bot.sendMessage(chat_id, text="Введи, пожалуйста, ключевые слова или вопрос.")
+        
+       if content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
+           KEYWORDS = info
        
            
        if GLOBAL_SEARCH and KEYWORDS:
-           info2=json.loads(request.get_data())
-           info2_text=info2["message"]["text"]
-           if "tutorial" in GLOBAL_SEARCH and info2["message"]["entities"]["type"]!="bot_command" :
-               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info2_text, string))
+           
+           if "tutorial" in GLOBAL_SEARCH:
+               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
                variants=df_temp.values
-               GLOBAL_SEARCH=""
+               GLOBAL_SEARCH = None
+               KEYWORDS = None
         #forming link from ttorial
                for var in variants:
                    bot.sendMessage(chat_id=chat_id, 
@@ -125,10 +125,11 @@ def hook():
            
        
            if "article" in GLOBAL_SEARCH:
-               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info2_text, string))
+               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
                variants=df_temp.values
-               GLOBAL_SEARCH=""
+               GLOBAL_SEARCH = None
+               KEYWORDS = None
         #forming link from ttorial
                for var in variants:
                    bot.sendMessage(chat_id=chat_id,
@@ -140,7 +141,8 @@ def hook():
            if "tag" in GLOBAL_SEARCH:
                df_temp=df_article[df_article["category"]==info2_text[:-1]]
                variants=df_temp.values
-               GLOBAL_SEARCH=""
+               GLOBAL_SEARCH = None
+               KEYWORDS = None
                for var in variants:
                    bot.sendMessage(chat_id=chat_id,
                                    text=var[2]+"\n"+
