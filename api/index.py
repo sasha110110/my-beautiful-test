@@ -122,7 +122,7 @@ def hook():
        
            if "article" in GLOBAL_SEARCH:
                df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
-               df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
+               df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
                variants=df_temp.values
                GLOBAL_SEARCH=""
         #forming link from ttorial
