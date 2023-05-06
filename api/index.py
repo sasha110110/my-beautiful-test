@@ -19,6 +19,9 @@ df_articles.apply(lambda x: x.astype(str).str.lower())
 df_tutorial.apply(lambda x: x.astype(str).str.lower())
 
 GLOBAL_SEARCH=""
+global df_articles
+global df_tutorial
+global GLOBAL_SEARCH
 
 
 def is_similar(query, string):
@@ -75,10 +78,6 @@ def check():
 
 @app.route("/"+TOKEN, methods=['POST'])
 def hook():
-    #global df_articles
-    #global df_tutorial
-    #global GLOBAL_SEARCH
- 
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
@@ -88,6 +87,9 @@ def hook():
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"]).lower()
        #console.log(info)
-       bot.sendMessage(chat_id=chat_id, text=info)
+       df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(info, string))
+       variants=df_temp.head(2).values
+       bot.sendMessage(chat_id=chat_id, text=str(variants))
+       
        
        return "ok"
