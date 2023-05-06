@@ -86,7 +86,7 @@ def hook():
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"]).lower()
        console.log(info)
-       bot.sendMessage(chat_id="1093497662", text=str(info))
+       bot.sendMessage(chat_id="1093497662", text=info)
        #greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
        #from_whom=request.json["message"]["from_user"]["username"]
@@ -122,7 +122,7 @@ def hook():
        
            if "article" in GLOBAL_SEARCH:
                df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(info, string))
-               df_temp=df_article.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
+               df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_article.index[df_article.vars==0][0]))
                variants=df_temp.values
                GLOBAL_SEARCH=""
         #forming link from ttorial
