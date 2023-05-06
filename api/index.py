@@ -86,9 +86,9 @@ def hook():
        content = json.loads(request.get_data())# #WORKING
        
    
-       chat_id=request.json["message"]["chat"]["id"]
-       info=str(request.json["message"]["text"]).lower()
-       console.log(info)
+       #chat_id=request.json["message"]["chat"]["id"]
+       #info=str(request.json["message"]["text"]).lower()
+       #console.log(info)
        bot.sendMessage(chat_id="1093497662", text=str(content))
        
     return "ok"
