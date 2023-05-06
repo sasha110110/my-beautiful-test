@@ -86,6 +86,7 @@ def hook():
        chat_id=request.json["message"]["chat"]["id"]
        info=str(request.json["message"]["text"]).lower()
        console.log(info)
+       bot.sendMessage(chat_id="1093497662", text=str(info))
        #greet_text="Привет. Я бот простого поиска Flowvision"+"\n"+"Пожалуйста, выбери в синем меню, где мне поискать!"
        
        #from_whom=request.json["message"]["from_user"]["username"]
