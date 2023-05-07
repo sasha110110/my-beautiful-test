@@ -108,7 +108,7 @@ def hook():
             bot.sendMessage(chat_id, text="TESTING")
             KEYWORDS = info
                    
-            if "tutorial" in GLOBAL_SEARCH:
+            if "tutorial" in GLOBAL_SEARCH and KEYWORDS is not None:
                df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
                variants=df_temp.values
@@ -122,7 +122,7 @@ def hook():
                                    disable_web_page_preview=False)
            
        
-            if "article" in GLOBAL_SEARCH:
+            if "article" in GLOBAL_SEARCH and KEYWORDS is not None:
                df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
                variants=df_temp.values
@@ -136,7 +136,7 @@ def hook():
            
             
     
-            if "tag" in GLOBAL_SEARCH:
+            if "tag" in GLOBAL_SEARCH and KEYWORDS is not None:
                df_temp=df_article[df_article["category"]==KEYWORDS[:-1]]
                variants=df_temp.values
                GLOBAL_SEARCH = None
@@ -147,5 +147,5 @@ def hook():
                                    str(var[1]))
            
        
-       CHAT_ID=None
+       KEYWORDS=None
        return "ok"
