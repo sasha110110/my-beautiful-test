@@ -103,13 +103,10 @@ def hook():
            GLOBAL_SEARCH = info
            bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
         
-       if content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None and chat_id==CHAT_ID: #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
+       if GLOBAL_SEARCH is not None and chat_id==CHAT_ID and not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): 
+        #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
            KEYWORDS = info
-           
-       
-           
-       if GLOBAL_SEARCH is not None and KEYWORDS is not None: #if GLOBAL_SEARCH and KEYWORDS - initially not working
-           
+                   
            if "tutorial" in GLOBAL_SEARCH:
                df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
