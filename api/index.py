@@ -136,7 +136,7 @@ def hook():
             
     
            if "tag" in GLOBAL_SEARCH:
-               df_temp=df_article[df_article["category"]==KEYWORDS[:-1]
+               df_temp=df_article[df_article["category"]==KEYWORDS[:-1]]
                variants=df_temp.values
                GLOBAL_SEARCH = None
                KEYWORDS = None
