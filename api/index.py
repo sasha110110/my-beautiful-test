@@ -103,7 +103,7 @@ def hook():
            UPDATE_ID=update_id
            bot.sendMessage(chat_id, text=GLOBAL_SEARCH)
         
-       if update_id > UPDATE_ID and GLOBAL_SEARCH is not None: #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
+       if update_id > UPDATE_ID and not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
            KEYWORDS = info
            UPDATE_ID=0
        
