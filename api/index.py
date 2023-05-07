@@ -85,7 +85,7 @@ def hook():
     global df_tutorial
     global GLOBAL_SEARCH
     global KEYWORDS
-    UPDATE_ID=""
+    UPDATE_ID=0
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
         
@@ -103,9 +103,9 @@ def hook():
            UPDATE_ID=update_id
            bot.sendMessage(chat_id, text=GLOBAL_SEARCH)
         
-       if pdate_id > UPDATE_ID and GLOBAL_SEARCH is not None: #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
+       if update_id > UPDATE_ID and GLOBAL_SEARCH is not None: #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
            KEYWORDS = info
-           UPDATE_ID=""
+           UPDATE_ID=0
        
            
        if GLOBAL_SEARCH is not None and KEYWORDS is not None: #if GLOBAL_SEARCH and KEYWORDS - initially not working
