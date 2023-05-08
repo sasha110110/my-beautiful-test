@@ -94,16 +94,7 @@ def hook():
        chat_id=content["message"]["chat"]["id"]
        CHAT_ID=chat_id
        info=str(content["message"]["text"]).lower()
-    
-       if "help" in info:
-           bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
-           Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
-        
-       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
-           GLOBAL_SEARCH = info
-           bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
-        
-       if GLOBAL_SEARCH is not None and chat_id==CHAT_ID and any(info[1:] not in s for s in ["tutorial", "article", "tag", "help"]): 
+              if GLOBAL_SEARCH is not None and chat_id==CHAT_ID and any(info[1:] not in s for s in ["tutorial", "article", "tag", "help"]): 
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
             
             KEYWORDS = info
@@ -148,4 +139,14 @@ def hook():
            
        
        KEYWORDS=None
+    
+       if "help" in info:
+           bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
+           Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
+        
+       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
+           GLOBAL_SEARCH = info
+           bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
+        
+
        return "ok"
