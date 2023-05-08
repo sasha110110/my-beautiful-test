@@ -94,13 +94,8 @@ def hook():
        chat_id=content["message"]["chat"]["id"]
        CHAT_ID=chat_id
        info=str(content["message"]["text"]).lower()
-        
-       if GLOBAL_SEARCH is not None and any(info[1:] not in s for s in ["tutorial", "articles", "tags", "help"]): 
-        #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
-            
-            KEYWORDS = info
-            bot.sendMessage(chat_id=chat_id, text=KEYWORDS)
-            #if KEYWORDS is not None:       
+       
+       if KEYWORDS is not None and GLOBAL_SEARCH is not None::       
             if "tutorial" in GLOBAL_SEARCH:
                 df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                 df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
@@ -137,6 +132,18 @@ def hook():
                         bot.sendMessage(chat_id=chat_id,
                                    text=var[2]+"\n"+
                                    str(var[1]))
+        
+       if info[1:] not in ["tutorial", "articles", "tags", "help"]: 
+        #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
+        
+            KEYWORDS = info
+            bot.sendMessage(chat_id=chat_id, text="Ключевые слова+\n"+KEYWORDS)
+            
+       if info[1:] in ["tutorial", "articles", "tags"]:
+           GLOBAL_SEARCH = info[1:]
+           bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
+            
+      
            
        
        
@@ -145,9 +152,7 @@ def hook():
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
         
-       if info[1:] in ["tutorial", "articles", "tags"]:
-           GLOBAL_SEARCH = info[1:]
-           bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
+       
         
 
        return "ok"
