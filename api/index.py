@@ -145,7 +145,7 @@ def hook():
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
         
-       if info[1:] in ["tutorial":, "articles", "tags"]:
+       if info[1:] in ["tutorial", "articles", "tags"]:
            GLOBAL_SEARCH = info[1:]
            bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
         
