@@ -98,53 +98,53 @@ def hook():
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
             
             KEYWORDS = info
-                   
-            if "tutorial" in GLOBAL_SEARCH and KEYWORDS is not None:
-               df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-               df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
-               variants=df_temp.values
-               GLOBAL_SEARCH = ""
-               KEYWORDS = ""
+            if KEYWORDS is not None:       
+                if "tutorial" in GLOBAL_SEARCH:
+                    df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
+                    df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+                    variants=df_temp.values
+                    GLOBAL_SEARCH = None
+                    KEYWORDS = None
         #forming link from ttorial
-               for var in variants:
-                   bot.sendMessage(chat_id=chat_id, 
+                    for var in variants:
+                        bot.sendMessage(chat_id=chat_id, 
                                    text=var[0]+"\n"+
                                    f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
                                    disable_web_page_preview=False)
            
        
-            if "article" in GLOBAL_SEARCH and KEYWORDS is not None:
-               df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-               df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
-               variants=df_temp.values
-               GLOBAL_SEARCH = Npne
-               KEYWORDS = None
+                elif "articles" in GLOBAL_SEARCH:
+                    df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
+                    df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
+                    variants=df_temp.values
+                    GLOBAL_SEARCH = Npne
+                    KEYWORDS = None
         #forming link from ttorial
-               for var in variants:
-                   bot.sendMessage(chat_id=chat_id,
+                    for var in variants:
+                        bot.sendMessage(chat_id=chat_id,
                                    text=var[0]+"\n"+
                                    str(var[1]))
            
             
     
-            if "tag" in GLOBAL_SEARCH and KEYWORDS is not None:
-               df_temp=df_article[df_article["category"]==KEYWORDS[:-1]]
-               variants=df_temp.values
-               GLOBAL_SEARCH = None
-               KEYWORDS = None
-               for var in variants:
-                   bot.sendMessage(chat_id=chat_id,
+                elif "tags" in GLOBAL_SEARCH:
+                    df_temp=df_article[df_article["category"]==KEYWORDS[:-1]]
+                    variants=df_temp.values
+                    GLOBAL_SEARCH = None
+                    KEYWORDS = None
+                    for var in variants:
+                        bot.sendMessage(chat_id=chat_id,
                                    text=var[2]+"\n"+
                                    str(var[1]))
            
        
-       KEYWORDS=None
+       
     
        if "help" in info:
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
         
-       if any(info[1:] in s for s in ["tutorial", "article", "tag"]):
+       if any(info[1:] in s for s in ["tutorial", "articles", "tags"]):
            GLOBAL_SEARCH = info
            bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
         
