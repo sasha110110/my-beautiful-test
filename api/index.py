@@ -124,13 +124,12 @@ def hook():
         #forming link from ttorial
                 for var in variants:
                     bot.sendMessage(chat_id=chat_id,
-                                   text=var[0]+"\n"+
-                                   str(var[1]))
+                                   text=var[0]+"\n"+str(var[1]))
            
             
     
-                elif "tags" in GLOBAL_SEARCH:
-                    df_temp=df_article[df_article["category"]==KEYWORDS[:-1]]
+            elif "tags" in GLOBAL_SEARCH:
+                    df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
                     variants=df_temp.values
                     GLOBAL_SEARCH = None
                     KEYWORDS = None
