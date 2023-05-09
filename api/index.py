@@ -42,7 +42,7 @@ def search():
     global KEYWORDS
     global bot
     global GLOBAL_SEARCH
-    globl df_tutorial
+    global df_tutorial
     global df_articles
     if KEYWORDS is not None and GLOBAL_SEARCH is not None:    
             if "tutorial" in GLOBAL_SEARCH:
