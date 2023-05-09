@@ -148,7 +148,7 @@ def hook():
             bot.sendMessage(chat_id=chat_id, text="Ключевые слова+\n"+KEYWORDS)
             search()
             
-       elif[1:] in ["tutorial", "articles", "tags"]:
+       elif info[1:] in ["tutorial", "articles", "tags"]:
            GLOBAL_SEARCH = info[1:]
            bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
            search()
