@@ -142,13 +142,13 @@ def hook():
        CHAT_ID=chat_id
        info=str(content["message"]["text"]).lower()
         
-       if info[1:] not in ["tutorial", "articles", "tags", "help"]: 
+       if not info[1:] in ["tutorial", "articles", "tags", "help"]: 
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
             KEYWORDS = info
             bot.sendMessage(chat_id=chat_id, text="Ключевые слова+\n"+KEYWORDS)
             search()
             
-       elif info[1:] in ["tutorial", "articles", "tags"]:
+       if info[1:] in ["tutorial", "articles", "tags"] and content["message"]["entities"]["type"]=="bot_command":
            GLOBAL_SEARCH = info[1:]
            bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
            search()
