@@ -160,14 +160,14 @@ def hook():
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
             
             
-       elif not info[1:] in ["tutorial", "articles", "tags", "help"]: 
+       elif info in ["/tutorial", "/articles", "/tags"]: 
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
-            KEYWORDS = info
+            GLOBAL_SEARCH = info[1:]
             #search()
             #ONE MORE TEST
             #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING #################################
        else:
-            GLOBAL_SEARCH = info[1:]
+            KEYWORDS=info
             bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS]))
             if GLOBAL_SEARCH=="tutorial":
                 df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
