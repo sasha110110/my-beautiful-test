@@ -171,7 +171,8 @@ def hook():
             #search()
             #ONE MORE TEST
             #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING #################################
-            if "tutorial" in GLOBAL_SEARCH:
+            temp_res=[GLOBAL_SEARCH, KEYWORDS]
+            if temp_res[0]=="tutorial":
                 df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                 df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
                 variants=df_temp.values
@@ -186,7 +187,7 @@ def hook():
                 
                 
                 
-            elif "articles" in GLOBAL_SEARCH:
+            elif temp_res[0]=="articles":
                 df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                 df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
                 variants=df_temp.values
@@ -199,7 +200,7 @@ def hook():
            
             
     
-            elif "tags" in GLOBAL_SEARCH:
+            elif temp_res[0]=="tags":
                 df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
                 variants=df_temp.values
                 GLOBAL_SEARCH = None
