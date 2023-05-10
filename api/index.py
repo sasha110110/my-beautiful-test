@@ -44,7 +44,6 @@ def search():
     global GLOBAL_SEARCH
     global df_tutorial
     global df_articles
-      
     if "tutorial" in GLOBAL_SEARCH:
             df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
             df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
@@ -60,7 +59,7 @@ def search():
                 
                 
                 
-   elif "articles" in GLOBAL_SEARCH:
+    elif "articles" in GLOBAL_SEARCH:
             df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
             df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
             variants=df_temp.values
