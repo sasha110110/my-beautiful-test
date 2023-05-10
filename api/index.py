@@ -168,6 +168,7 @@ def hook():
             #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING #################################
        else:
             GLOBAL_SEARCH = info[1:]
+            bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS]))
             if GLOBAL_SEARCH=="tutorial":
                 df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                 df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
