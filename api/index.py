@@ -168,8 +168,12 @@ def hook():
             #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING #################################
        else:
             KEYWORDS=info
-            temp_list=str([GLOBAL_SEARCH, KEYWORDS])
-            bot.sendMessage(chat_id=chat_id, text=temp_list)
+            if GLOBAL_SEARCH == "tutorial":
+                bot.sendMessage(chat_id=chat_id, text="it is ttor")
+            elif GLOBAL_SEARCH == "articles":
+                bot.sendMessage(chat_id=chat_id, text="it is art")
+            elif GLOBAL_SEARCH == "tags":
+                bot.sendMessage(chat_id=chat_id, text="it is tag")
             
            
         
