@@ -169,48 +169,7 @@ def hook():
        else:
             KEYWORDS=info
             bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS]))
-            if GLOBAL_SEARCH=="tutorial":
-                df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
-                variants=df_temp.values
-                GLOBAL_SEARCH = None
-                KEYWORDS = None
-        #forming link from ttorial
-                for var in variants:
-                    bot.sendMessage(chat_id=chat_id, 
-                                   text=var[0]+"\n"+
-                                   f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
-                                   disable_web_page_preview=False)
-                
-                
-                
-            elif GLOBAL_SEARCH == "articles":
-                df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-                df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
-                variants=df_temp.values
-                GLOBAL_SEARCH = Npne
-                KEYWORDS = None
-        #forming link from ttorial
-                for var in variants:
-                    bot.sendMessage(chat_id=chat_id,
-                                   text=var[0]+"\n"+str(var[1]))
            
-            
-    
-            elif GLOBAL_SEARCH == "tags":
-                df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
-                variants=df_temp.values
-                GLOBAL_SEARCH = None
-                KEYWORDS = None
-                for var in variants:
-                    bot.sendMessage(chat_id=chat_id,
-                                   text=var[2]+"\n"+
-                                   str(var[1]))
-            
-            
-       
-        
-       
         
 
        return "ok"
