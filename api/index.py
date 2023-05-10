@@ -166,7 +166,7 @@ def hook():
             #search()
             #ONE MORE TEST
             #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING #################################
-        else:
+       else:
             GLOBAL_SEARCH = info[1:]
             if GLOBAL_SEARCH=="tutorial":
                 df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
