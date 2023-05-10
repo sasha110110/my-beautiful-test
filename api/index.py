@@ -172,14 +172,14 @@ def hook():
             #ONE MORE TEST
             #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING #################################
             if "tutorial" in GLOBAL_SEARCH:
-            df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-            df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
-            variants=df_temp.values
-            GLOBAL_SEARCH = None
-            KEYWORDS = None
+                df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
+                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+                variants=df_temp.values
+                GLOBAL_SEARCH = None
+                KEYWORDS = None
         #forming link from ttorial
-            for var in variants:
-                bot.sendMessage(chat_id=chat_id, 
+                for var in variants:
+                    bot.sendMessage(chat_id=chat_id, 
                                    text=var[0]+"\n"+
                                    f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
                                    disable_web_page_preview=False)
@@ -194,7 +194,7 @@ def hook():
                 KEYWORDS = None
         #forming link from ttorial
                 for var in variants:
-                bot.sendMessage(chat_id=chat_id,
+                    bot.sendMessage(chat_id=chat_id,
                                    text=var[0]+"\n"+str(var[1]))
            
             
