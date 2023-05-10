@@ -57,9 +57,10 @@ def search():
                                    text=var[0]+"\n"+
                                    f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
                                    disable_web_page_preview=False)
-           
-       
-        elif "articles" in GLOBAL_SEARCH:
+                
+                
+                
+   elif "articles" in GLOBAL_SEARCH:
             df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
             df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
             variants=df_temp.values
@@ -72,7 +73,7 @@ def search():
            
             
     
-        elif "tags" in GLOBAL_SEARCH:
+    elif "tags" in GLOBAL_SEARCH:
                 df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
                 variants=df_temp.values
                 GLOBAL_SEARCH = None
@@ -98,6 +99,13 @@ bot.deleteWebhook()
 time.sleep(1)
 bot.setWebhook(url)
 
+def testing():
+    global KEYWORDS
+    global bot
+    global GLOBAL_SEARCH
+    global df_tutorial
+    global df_articles
+    bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])
 
 @app.route('/')
 def home():
@@ -144,7 +152,8 @@ def hook():
        info=str(content["message"]["text"]).lower()
         
        if GLOBAL_SEARCH is not None and KEYWORDS is not None:
-          search()
+            testing()
+          #search()
                 
             
        if info in ["/tutorial", "/articles", "/tags"]:# and content["message"]["entities"]["type"]=="bot_command":
