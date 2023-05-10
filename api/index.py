@@ -136,14 +136,15 @@ def hook():
            
     
     if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
-        
+       
        content = json.loads(request.get_data())# #WORKING
        chat_id=content["message"]["chat"]["id"]
        CHAT_ID=chat_id
        info=str(content["message"]["text"]).lower()
+       bot.sendMessage(chat_id, text=info)
                 
             
-       if info[1:] in ["tutorial", "articles", "tags"] and content["message"]["entities"]["type"]=="bot_command":
+       if info in ["/tutorial", "/articles", "/tags"]:# and content["message"]["entities"]["type"]=="bot_command":
            GLOBAL_SEARCH = info[1:]
            bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
            
