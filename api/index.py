@@ -168,9 +168,9 @@ def hook():
        else: #if not info[1:] in ["tutorial", "articles", "tags", "help"]: 
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
             KEYWORDS = info
-            #search()
+            search()
             #ONE MORE TEST
-            bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS]))
+            #bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])) #WORKING
             
             
        
