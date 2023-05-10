@@ -104,7 +104,7 @@ def testing():
     global GLOBAL_SEARCH
     global df_tutorial
     global df_articles
-    bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS])
+    bot.sendMessage(chat_id=chat_id, text=str([GLOBAL_SEARCH, KEYWORDS]))
 
 @app.route('/')
 def home():
