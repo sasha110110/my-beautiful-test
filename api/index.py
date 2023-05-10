@@ -44,41 +44,41 @@ def search():
     global GLOBAL_SEARCH
     global df_tutorial
     global df_articles
-    if KEYWORDS is not None and GLOBAL_SEARCH is not None:    
-            if "tutorial" in GLOBAL_SEARCH:
-                df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
-                variants=df_temp.values
-                GLOBAL_SEARCH = None
-                KEYWORDS = None
+      
+    if "tutorial" in GLOBAL_SEARCH:
+            df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
+            df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+            variants=df_temp.values
+            GLOBAL_SEARCH = None
+            KEYWORDS = None
         #forming link from ttorial
-                for var in variants:
-                    bot.sendMessage(chat_id=chat_id, 
+            for var in variants:
+                bot.sendMessage(chat_id=chat_id, 
                                    text=var[0]+"\n"+
                                    f"http://cit.bsau.ru/netcat_files/File/CIT/manuals/Flow_Vision.pdf#page={var[1]}",
                                    disable_web_page_preview=False)
            
        
-            elif "articles" in GLOBAL_SEARCH:
-                df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-                df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
-                variants=df_temp.values
-                GLOBAL_SEARCH = Npne
-                KEYWORDS = None
+        elif "articles" in GLOBAL_SEARCH:
+            df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
+            df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
+            variants=df_temp.values
+            GLOBAL_SEARCH = Npne
+            KEYWORDS = None
         #forming link from ttorial
-                for var in variants:
-                    bot.sendMessage(chat_id=chat_id,
+            for var in variants:
+                bot.sendMessage(chat_id=chat_id,
                                    text=var[0]+"\n"+str(var[1]))
            
             
     
-            elif "tags" in GLOBAL_SEARCH:
-                    df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
-                    variants=df_temp.values
-                    GLOBAL_SEARCH = None
-                    KEYWORDS = None
-                    for var in variants:
-                        bot.sendMessage(chat_id=chat_id,
+        elif "tags" in GLOBAL_SEARCH:
+                df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
+                variants=df_temp.values
+                GLOBAL_SEARCH = None
+                KEYWORDS = None
+                for var in variants:
+                    bot.sendMessage(chat_id=chat_id,
                                    text=var[2]+"\n"+
                                    str(var[1]))
       
@@ -135,18 +135,22 @@ def hook():
     CHAT_ID=None      
            
     
-    if request.method == "POST": # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
+    if request.method == "POST":
+       # and not "Yummietestbot" in request.json["message"]["from_user"]["username"]:
        
        content = json.loads(request.get_data())# #WORKING
        chat_id=content["message"]["chat"]["id"]
        CHAT_ID=chat_id
        info=str(content["message"]["text"]).lower()
+        
+       if GLOBAL_SEARCH is not None and KEYWORDS is not None:
+          search()
                 
             
        if info in ["/tutorial", "/articles", "/tags"]:# and content["message"]["entities"]["type"]=="bot_command":
            GLOBAL_SEARCH = info[1:]
-           bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
-           search()
+           #bot.sendMessage(chat_id, text="Буду искать здесь -> \n"+GLOBAL_SEARCH)
+           
            
                  
        elif "help" in info:
@@ -156,8 +160,8 @@ def hook():
        else: #if not info[1:] in ["tutorial", "articles", "tags", "help"]: 
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
             KEYWORDS = info
-            bot.sendMessage(chat_id=chat_id, text="Ключевые слова+\n"+KEYWORDS)
-            search()
+            #bot.sendMessage(chat_id=chat_id, text="Ключевые слова+\n"+KEYWORDS)
+            
             
        
         
