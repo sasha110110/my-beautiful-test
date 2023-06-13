@@ -18,6 +18,7 @@ global GLOBAL_SEARCH
 global KEYWORDS
 df_articles=pd.read_csv(os.path.join("data", "df_all_articles.csv"))
 df_tutorial=pd.read_csv(os.path.join("data", "fv_tutorial.csv"))
+df_tags=pd.read_csv(os.path.join("data", "tags_df.csv"))
 df_articles.apply(lambda x: x.astype(str).str.lower())
 df_tutorial.apply(lambda x: x.astype(str).str.lower())
 
@@ -73,7 +74,8 @@ def test():
 def check():
     global df_articles
     df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar("турбина", string))
-    df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
+    df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(7, df_articles.index[df_articles.vars==0][0]))
+    df_temp=df_temp.drop_duplicates()
     variants=df_temp.values
     bot.sendMessage(chat_id="1093497662", text=str(variants))
     
@@ -106,6 +108,13 @@ def hook():
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
             
+       elif "all_tags" in info:
+           variants=df_tags.values
+           for var in variants:
+               bot.sendMessage(chat_id=chat_id,
+                                   text=var[0]+"\n"+var[1])
+          
+            
             
        elif info in ["/tutorial", "/articles", "/tags"]: 
         #and content["message"]["from"]["is_bot"]==False: #and #not any(info[1:] in s for s in ["tutorial", "article", "tag", "help"]): #content["message"]["entities"]["type"]!="bot_command" and GLOBAL_SEARCH is not None: 
@@ -117,7 +126,11 @@ def hook():
             KEYWORDS=info
             if GLOBAL_SEARCH == "tutorial":
                 df_tutorial["vars"]=df_tutorial["Q"].apply(lambda string: is_similar(KEYWORDS, string))
-                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(5, df_tutorial.index[df_tutorial.vars==0][0]))
+                df_temp=df_tutorial.sort_values("vars", ascending=[False]).head(max(7, df_tutorial.index[df_tutorial.vars==0][0]))
+                df_temp=df_temp.drop_duplicates()
+                if df_temp.head(3)==df_tutorial.head(3):
+                    bot.sendMessage(chat_id=chat_id, 
+                                   text="Ничего не нашлось! Переформулируйте, пожалуйста!")
                 variants=df_temp.values
                 #GLOBAL_SEARCH = None
                 #KEYWORDS = None
@@ -130,6 +143,10 @@ def hook():
             elif GLOBAL_SEARCH == "articles":
                 df_articles["vars"]=df_articles["Q"].apply(lambda string: is_similar(KEYWORDS, string))
                 df_temp=df_articles.sort_values("vars", ascending=[False]).head(max(5, df_articles.index[df_articles.vars==0][0]))
+                df_temp=df_temp.drop_duplicates()
+                if df_temp.head(3)==df_articles.head(3):
+                    bot.sendMessage(chat_id=chat_id, 
+                                   text="Ничего не нашлось! Переформулируйте, пожалуйста!")
                 variants=df_temp.values
             #GLOBAL_SEARCH = Npne
             #KEYWORDS = None
@@ -138,14 +155,20 @@ def hook():
                     bot.sendMessage(chat_id=chat_id,
                                    text=var[0]+"\n"+str(var[1]))
             elif GLOBAL_SEARCH == "tags":
-                df_temp=df_articles[df_articles["category"]==KEYWORDS[:-1]]
+                df_temp=df_tags[df_tags["tag"]==KEYWORDS[:-1]]
                 variants=df_temp.values
+                if not variants:
+                    bot.sendMessage(chat_id=chat_id, 
+                                   text="Ничего не нашлось! Переформулируйте, пожалуйста!")
+                    
                 #GLOBAL_SEARCH = None
                 #KEYWORDS = None
                 for var in variants:
                     bot.sendMessage(chat_id=chat_id,
-                                   text=var[2]+"\n"+
+                                   text=var[0]+"\n"+
                                    str(var[1]))
+                    
+                 
             
            
         
