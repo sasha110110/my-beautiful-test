@@ -108,7 +108,7 @@ def hook():
            bot.sendMessage(chat_id, text="Привет, я бот-простоо поиска. 1 ВЫБЕРИ В СИНЕМ МЕНЮ, ГДЕ МНЕ ИСКАТЬ \n 2. ВВЕДИ КЛЮЧЕВЫЕ СЛОВА \n\
            Я ищу в туториале, на сайте по названиям статей или на сайте по тэгам и темам") #TEST
             
-       elif "all_tags" in info:
+       elif "alltags" in info:
            variants=df_tags.values
            for var in variants:
                bot.sendMessage(chat_id=chat_id,
